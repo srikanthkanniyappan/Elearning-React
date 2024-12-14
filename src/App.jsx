@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { initFlowbite } from "flowbite";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -14,15 +14,21 @@ import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 import MyCourses from "./pages/MyCourses";
 import CourseContent from "./pages/CourseContent";
-
+import LandingPage from "./pages/LandingPage";
+import AllCourses from "./pages/AllCourses";
+import ScrollToTop from "./components/ScrollToTop";
 
 const App = () => {
   useEffect(() => {
     initFlowbite(); // Initialize Flowbite
   }, []);
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    localStorage.getItem("access_token") !== null
+  );
 
   return (
     <Router>
+    <ScrollToTop/>
       <Navbar />
       <Routes>
         {/* Protected Routes */}
@@ -31,18 +37,15 @@ const App = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/my-courses" element={<MyCourses />} />
           <Route path="/settings" element={<Settings />} />
-          {/* <Route path="/:courseName/" element={<CourseDetails />} />
-          <Route path="/:courseName/:videoId" element={<CourseDetails />} />
-          <Route path="/courses/:courseName" element={<CourseContent />} /> */}
+          <Route path="/all-courses" element={<AllCourses />} />
           <Route
             path="/courses/:courseTitleSlug/:courseId/video/:videoId"
-            // path="/courses/:courseTitleSlug/video/:videoId"
             element={<CourseContent />}
           />
         </Route>
 
         {/* Public Routes */}
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<LandingPage/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/about" element={<About />} />

@@ -1,57 +1,82 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
-const courses = [
-  {
-    id: 1,
-    title: "Introduction to Programming",
-    description: "Learn the basics of programming to build problem-solving.",
-    link: "/courses/1",
-    image: "/assets/images/coding.jpg",
-  },
-  {
-    id: 2,
-    title: "Web Development Essentials",
-    description: "An introductory course on HTML, CSS, and JavaScript.",
-    link: "/courses/2",
-    image: "/assets/images/webdevelopment.jpg",
-  },
-  {
-    id: 3,
-    title: "Data Science Fundamentals & ML",
-    description: "Get started with data analysis and visualization.",
-    link: "/courses/3",
-    image: "/assets/images/ml.jpg",
-  },
-];
-
+import Footer from "../components/Footer";
+import courseService from "../services/course.services";
 
 const Courses = () => {
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        // Fetch courses from the API
+        const data = await courseService.getAllCourses();
+        setCourses(data); // Update state with the API response
+      } catch (err) {
+        console.error("Error fetching courses:", err);
+        setError("Failed to load courses. Please try again later.");
+      } finally {
+        setLoading(false); // Stop the loading spinner
+      }
+    };
+
+    fetchCourses();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="bg-gray-100 dark:bg-gray-900 pt-28 h-full">
+        <h1 className="text-4xl font-bold text-center text-blue-700 dark:text-white mb-6">
+          Loading Courses...
+        </h1>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bg-gray-100 dark:bg-gray-900 pt-28 h-full">
+        <h1 className="text-4xl font-bold text-center text-red-500 mb-6">
+          {error}
+        </h1>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex flex-col items-center py-10">
-      <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-8">
+    <div className="bg-gray-100 dark:bg-gray-900 pt-24 h-full">
+      <h1 className="text-4xl font-bold text-center text-blue-700 dark:text-white mb-6">
         Explore Our Courses
       </h1>
-      <p className="text-lg text-gray-600 dark:text-gray-300 mb-12 max-w-2xl text-center">
-        Find a course that fits your learning goals. From programming to data science, we have something for everyone.
+      <p className="text-lg text-center text-gray-600 dark:text-gray-300 mb-6 max-w-3xl mx-auto">
+        Find a course that fits your learning goals. From programming to data
+        science, we have something for everyone.
       </p>
-      <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-6 max-w-6xl">
+      <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-6 max-w-6xl mx-auto mb-10">
         {courses.map((course) => (
-          <Link to={course.link} key={course.id} className="transform transition duration-300 hover:scale-105">
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700">
+          <Link
+            to='signup'
+            key={course.id}
+            className="transform transition duration-300 hover:scale-105"
+          >
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 flex flex-col h-full">
               <img
-                src={course.image}
+                src={course.poster}
                 alt={course.title}
                 className="w-full h-48 object-cover"
               />
-              <div className="p-6">
-                <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-2">
-                  {course.title}
-                </h2>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">
-                  {course.description}
-                </p>
-                <span className="text-blue-600 dark:text-blue-400 ">
+              <div className="flex flex-col justify-between p-6 flex-grow">
+                <div>
+                  <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-3">
+                    {course.title}
+                  </h2>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    {course.description}
+                  </p>
+                </div>
+                <span className="text-blue-600 dark:text-blue-400 font-medium mt-auto">
                   Learn More →
                 </span>
               </div>
@@ -59,6 +84,7 @@ const Courses = () => {
           </Link>
         ))}
       </div>
+      <Footer />
     </div>
   );
 };

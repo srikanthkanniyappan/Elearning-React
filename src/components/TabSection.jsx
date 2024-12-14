@@ -93,7 +93,7 @@ const TabSection = ({video}) => {
           aria-labelledby="qa-tab"
         >
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            This is some placeholder content for the <strong className="font-medium text-gray-800 dark:text-white">Q&A tab's associated content</strong>.
+            <strong className="font-medium text-gray-800 dark:text-white">Coming Soon...</strong>.
           </p>
         </div>
       </div>

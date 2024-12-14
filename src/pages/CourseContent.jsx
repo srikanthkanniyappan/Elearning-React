@@ -24,25 +24,26 @@ const CourseContent = () => {
   }, [videoId]);
 
   return (
-    <div className="flex">
+    <div className="bg-gray-100 dark:bg-gray-900 pt-[72px] h-full"> 
+        <div className="flex">
       {/* Main Content */}
       <main className="flex-[2.5] bg-gray-50 dark:bg-gray-900">
         {/* VideoPlayer should automatically adjust based on the currentVideo */}
         <div className="bg-gray-700">
           <VideoPlayer video={video} />
         </div>
-        <TabSection video={video}/>
+        <TabSection video={video} />
       </main>
 
       {/* Right Sidebar */}
       <div className="lg:flex-[1.2] hidden lg:block">
         <div className="sidebar lg:flex-[1.2] hidden lg:block">
-          {/* {window.innerWidth >= 1024 && <Sidebar />} */}
           <Sidebar />
         </div>
       </div>
-    </div>
+    </div></div>
   );
 };
+
 
 export default CourseContent;

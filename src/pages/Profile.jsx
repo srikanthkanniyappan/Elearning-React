@@ -1,97 +1,104 @@
-// src/pages/Profile.jsx
 import React, { useEffect, useState } from 'react';
-import authServices from '../services/auth.services'; // Import auth services
+import authService from '../services/auth.services'; // Assuming the path to auth services is correct
 
 const Profile = () => {
-  const [userProfile, setUserProfile] = useState(null);
-  const [isOnline, setIsOnline] = useState(false);
+  const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false); // Modal visibility state
 
-  // Fetch user profile and online status when the component mounts
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchProfile = async () => {
       try {
-        // Fetch user profile
-        const profileData = await authServices.getUserProfile();
-        setUserProfile(profileData);
-
-        // Fetch user online status
-        const onlineStatus = await authServices.checkUserOnlineStatus();
-        setIsOnline(onlineStatus.is_online);
-      } catch (error) {
-        setError('An error occurred while fetching data.');
-        console.error(error);
-      } finally {
+        const data = await authService.getUserProfile();
+        setProfile(data);
+        setLoading(false);
+      } catch (err) {
+        setError("Error fetching profile data");
         setLoading(false);
       }
     };
 
-    fetchData();
+    fetchProfile();
   }, []);
 
   if (loading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen bg-gray-50">
-        <div className="text-xl text-blue-500">Loading...</div>
-      </div>
-    );
+    return <div>Loading...</div>;
   }
 
   if (error) {
-    return (
-      <div className="flex justify-center items-center min-h-screen bg-red-100 text-red-600">
-        <div className="text-lg">{error}</div>
-      </div>
-    );
+    return <div>{error}</div>;
   }
 
+  // Capitalize the first letter of the role
+  const formattedRole = profile.role.charAt(0).toUpperCase() + profile.role.slice(1);
+
+  // Toggle modal visibility
+  const handleEditClick = () => {
+    setIsModalOpen(true);
+  };
+
+  // Close the modal
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
-    <div className="p-6 bg-gradient-to-r from-blue-100 via-blue-200 to-blue-300 min-h-screen">
-      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6 space-y-6">
+    <div className="flex justify-center items-center h-screen bg-gray-50 py-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full bg-white shadow-lg rounded-lg p-6">
         {/* Profile Header */}
-        <div className="text-center mb-6">
-          <h1 className="text-3xl font-semibold text-gray-800 mb-2">Your Profile</h1>
-          <p className="text-md text-gray-600">View and update your profile information here.</p>
+        <div className="flex justify-center mb-6">
+          <img
+            className="w-32 h-32 rounded-full border-4 border-blue-500"
+            src="https://randomuser.me/api/portraits/men/1.jpg" // You can replace this with a dynamic avatar URL if available
+            alt="Profile"
+          />
         </div>
 
-        {/* User Profile */}
-        {userProfile && (
-          <div className="flex justify-center items-center">
-            <div className="w-full sm:w-3/4 md:w-1/2 bg-white rounded-lg shadow-md p-6 space-y-4">
-              {/* Username */}
-              <div className="flex justify-between items-center">
-                <span className="font-medium text-gray-700 text-lg">Username:</span>
-                <span className="text-gray-800">{userProfile.username}</span>
-              </div>
+        {/* Profile Information */}
+        <h2 className="text-center text-2xl font-semibold text-gray-800 mb-2">{profile.username}</h2>
+        <p className="text-center text-sm text-gray-600 mb-4">{formattedRole}</p>
 
-              {/* Email */}
-              <div className="flex justify-between items-center">
-                <span className="font-medium text-gray-700 text-lg">Email:</span>
-                <span className="text-gray-800">{userProfile.email}</span>
-              </div>
+        {/* Contact Section */}
+        <div>
+          <h3 className="text-lg font-medium text-gray-800 mb-2">Contact</h3>
+          <ul className="space-y-2">
+            <li className="flex items-center text-sm text-gray-600">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+              </svg>
+              {profile.email}
+            </li>
+          </ul>
+        </div>
 
-              {/* Role */}
-              <div className="flex justify-between items-center">
-                <span className="font-medium text-gray-700 text-lg">Role:</span>
-                <span className="text-gray-800">{userProfile.role}</span>
-              </div>
-
-              {/* Online Status */}
-              <div className="flex justify-between items-center">
-                <span className="font-medium text-gray-700 text-lg">Online Status:</span>
-                <span
-                  className={`py-1 px-3 rounded-full text-white ${
-                    isOnline ? 'bg-green-500' : 'bg-red-500'
-                  }`}
-                >
-                  {isOnline ? 'Online' : 'Offline'}
-                </span>
-              </div>
-            </div>
-          </div>
-        )}
+        {/* Button */}
+        <div className="mt-6 text-center">
+          <button
+            onClick={handleEditClick} // Open modal on button click
+            className="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition"
+          >
+            Edit Profile
+          </button>
+        </div>
       </div>
+
+      {/* Modal: "Coming Soon" */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
+            <h3 className="text-xl font-semibold text-gray-800 mb-4">Coming Soon!</h3>
+            <p className="text-gray-600 mb-6">We are working on this feature. Stay tuned!</p>
+            <button
+              onClick={handleCloseModal} // Close modal
+              className="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -39,7 +39,7 @@ const Login = () => {
   };
 
   return (
-    <div className="h-[85vh] flex flex-col bg-gray-100 dark:bg-gray-900">
+    <div className="h-screen flex flex-col bg-gray-100 dark:bg-gray-900">
       {/* Main Content */}
       <div className="flex-grow flex items-center justify-center p-6">
         <div className="w-full max-w-sm bg-white p-8 rounded-lg shadow-lg">

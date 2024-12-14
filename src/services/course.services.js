@@ -1,12 +1,32 @@
 // course.services.js
 import api from "./axios.config";
 
+const getAllCourses = async () => {
+  try {
+    const response = await api.get("/courses/all-courses/");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching all courses", error);
+    throw error;
+  }
+};
+
 const getCourses = async () => {
   try {
     const response = await api.get("/courses/course-list/");
     return response.data;
   } catch (error) {
     console.error("Error fetching courses", error);
+    throw error;
+  }
+};
+
+const getCoursesWithEnrollmentStatus = async () => {
+  try {
+    const response = await api.get("/courses/all-courses-with-status/");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching courses with enrollment status", error);
     throw error;
   }
 };
@@ -153,6 +173,8 @@ const getLastWatched = async (courseId) => {
 
 export default {
   getCourses,
+  getAllCourses,
+  getCoursesWithEnrollmentStatus,
   getCourseDetails,
   getCourseVideos,
   getVideo,
