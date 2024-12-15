@@ -25,7 +25,7 @@ const LandingPage = () => {
             {/* Left Side - Content Section */}
             <div
               className="w-full md:w-1/2 md:px-3 max-w-full"
-              data-aos="fade-left"
+              data-aos="fade-up"
             >
               <div className="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
                 <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl">
@@ -71,7 +71,7 @@ const LandingPage = () => {
             </div>
 
             {/* Right Side - Image Section */}
-            <div className="w-full md:w-1/2 max-w-full" data-aos="fade-right">
+            <div className="w-full md:w-1/2 max-w-full" data-aos="fade-up">
               <div className="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
                 <img
                   src="/assets/images/landing.jpg"
