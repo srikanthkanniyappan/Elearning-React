@@ -17,6 +17,7 @@ import CourseContent from "./pages/CourseContent";
 import LandingPage from "./pages/LandingPage";
 import AllCourses from "./pages/AllCourses";
 import ScrollToTop from "./components/ScrollToTop";
+import Signup from "./pages/Signup";
 
 const App = () => {
   useEffect(() => {
@@ -46,6 +47,7 @@ const App = () => {
 
         {/* Public Routes */}
         <Route path="/" element={<LandingPage/>} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/about" element={<About />} />

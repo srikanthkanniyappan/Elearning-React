@@ -57,7 +57,7 @@ const Courses = () => {
       <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-6 max-w-6xl mx-auto mb-10">
         {courses.map((course) => (
           <Link
-            to='signup'
+            to='/signup'
             key={course.id}
             className="transform transition duration-300 hover:scale-105"
           >

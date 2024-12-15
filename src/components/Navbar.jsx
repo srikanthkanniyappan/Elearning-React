@@ -101,19 +101,28 @@ const Navbar = () => {
           </span>
         </NavLink>
 
-        <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+        <div className="flex md:order-2 space-x-4 md:space-x-4 rtl:space-x-reverse">
           {!isAuthenticated ? (
-            <NavLink
-              to="/login"
-              onClick={closeMobileMenu}
-              className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Get started
-            </NavLink>
+            <>
+              <NavLink
+                to="/login"
+                onClick={closeMobileMenu}
+                className="text-blue-600 bg-white border-2 border-blue-600 hover:bg-blue-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-2 transition-colors duration-200 ease-in-out hidden sm:block"
+              >
+                Login
+              </NavLink>
+              <NavLink
+                to="/signup"
+                onClick={closeMobileMenu}
+                className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-2 transition-colors duration-200 ease-in-out"
+              >
+                Signup
+              </NavLink>
+            </>
           ) : (
             <button
               onClick={handleLogout}
-              className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-2 transition-colors duration-200 ease-in-out"
             >
               Logout
             </button>
@@ -273,6 +282,21 @@ const Navbar = () => {
                     }
                   >
                     Contact
+                  </NavLink>
+                </li>
+                <li className="block sm:hidden">
+                  <NavLink
+                    to="/login"
+                    onClick={closeMobileMenu}
+                    className={({ isActive }) =>
+                      `block py-2 px-3 md:p-0 text-gray-900 rounded ${
+                        isActive
+                          ? "bg-blue-600 text-white md:text-blue-600 md:bg-white"
+                          : "hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-600 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                      }`
+                    }
+                  >
+                    Login
                   </NavLink>
                 </li>
               </>

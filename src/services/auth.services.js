@@ -1,17 +1,54 @@
 // auth.services.js
 import api from './axios.config';
 
-const login = async (username, password) => {
+// const login = async (username, password, role) => {
+//   try {
+//     const response = await api.post('/authentication/login/', {
+//       username,
+//       password,
+//       role, // Include role in the login request
+//     });
+//     localStorage.setItem('access_token', response.data.access);
+//     localStorage.setItem('refresh_token', response.data.refresh);
+//     return response.data;
+//   } catch (error) {
+//     console.error("Login failed", error);
+//     throw error;
+//   }
+// }
+
+const login = async (identifier, password, role) => {
   try {
     const response = await api.post('/authentication/login/', {
-      username,
+      username: identifier,  // Use "username" key for both username and email
       password,
+      role, // Include role in the login request
+    });
+
+    // Store tokens in localStorage
+    localStorage.setItem('access_token', response.data.access);
+    localStorage.setItem('refresh_token', response.data.refresh);
+
+    return response.data;
+  } catch (error) {
+    console.error("Login failed", error);
+    throw error;
+  }
+};
+
+const register = async (username, email, password, role) => {
+  try {
+    const response = await api.post('/authentication/register/', {
+      username,
+      email,
+      password,
+      role,
     });
     localStorage.setItem('access_token', response.data.access);
     localStorage.setItem('refresh_token', response.data.refresh);
     return response.data;
   } catch (error) {
-    console.error("Login failed", error);
+    console.error("Registration failed", error);
     throw error;
   }
 };
@@ -62,6 +99,7 @@ const checkUserOnlineStatus = async () => {
 
 export default {
   login,
+  register,
   refreshAccessToken,
   getUserProfile,
   updateUserStatus,
