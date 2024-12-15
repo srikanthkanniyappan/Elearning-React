@@ -1,13 +1,8 @@
 import { defineConfig } from "vite";
-import vercel from "vite-plugin-vercel";
 import react from "@vitejs/plugin-react";
 
+// https://vite.dev/config/
 export default defineConfig({
-  server: {
-    port: process.env.PORT,
-  },
-  plugins: [vercel(), react()],
-  define: {
-    __APP_ENV__: process.env.VITE_API_URL,
-  },
+  plugins: [react()],
+  base: "/Elearning",
 });
