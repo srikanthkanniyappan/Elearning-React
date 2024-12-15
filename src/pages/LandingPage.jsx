@@ -14,6 +14,7 @@ const LandingPage = () => {
     Aos.init({
       duration: 1000,
       easing: "ease-in-out",
+      once: true,
     });
   }, []);
   return (
@@ -22,7 +23,10 @@ const LandingPage = () => {
         <div className="container max-w-6xl px-8 mx-auto xl:px-5">
           <div className="flex flex-wrap items-center sm:-mx-3">
             {/* Left Side - Content Section */}
-            <div className="w-full md:w-1/2 md:px-3" data-aos="fade-left">
+            <div
+              className="w-full md:w-1/2 md:px-3 max-w-full"
+              data-aos="fade-left"
+            >
               <div className="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
                 <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl">
                   <span className="inline-block whitespace-nowrap">
@@ -67,7 +71,7 @@ const LandingPage = () => {
             </div>
 
             {/* Right Side - Image Section */}
-            <div className="w-full md:w-1/2" data-aos="fade-right">
+            <div className="w-full md:w-1/2 max-w-full" data-aos="fade-right">
               <div className="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
                 <img
                   src="/assets/images/landing.jpg"
@@ -83,7 +87,7 @@ const LandingPage = () => {
         <div className="box-border flex flex-col items-center content-center px-8 mx-auto leading-6 text-black border-0 border-gray-300 border-solid md:flex-row max-w-7xl lg:px-16">
           {/* Image */}
           <div
-            className="box-border relative w-full max-w-md px-4 mt-5 mb-4 -ml-5 text-center bg-no-repeat bg-contain border-solid md:ml-0 md:mt-0 md:max-w-none lg:mb-0 md:w-1/2 xl:pl-10"
+            className="max-w-full box-border relative w-full px-4 mt-5 mb-4 -ml-5 text-center bg-no-repeat bg-contain border-solid md:ml-0 md:mt-0 md:max-w-none lg:mb-0 md:w-1/2 xl:pl-10"
             data-aos="fade-up"
           >
             <img
@@ -95,7 +99,7 @@ const LandingPage = () => {
 
           {/* Content */}
           <div
-            className="box-border order-first w-full text-black border-solid md:w-1/2 md:pl-10 md:order-none"
+            className="max-w-full box-border order-first w-full text-black border-solid md:w-1/2 md:pl-10 md:order-none"
             data-aos="fade-up"
           >
             <h2 className="m-0 text-xl font-semibold leading-tight border-0 border-gray-300 lg:text-3xl md:text-2xl">
@@ -132,7 +136,7 @@ const LandingPage = () => {
         <div className="box-border flex flex-col items-center content-center px-8 mx-auto mt-2 leading-6 text-black border-0 border-gray-300 border-solid md:mt-20 xl:mt-0 md:flex-row max-w-7xl lg:px-16">
           {/* Content */}
           <div
-            className="box-border w-full text-black border-solid md:w-1/2 md:pl-6 xl:pl-32"
+            className="box-border w-full max-w-full text-black border-solid md:w-1/2 md:pl-6 xl:pl-32"
             data-aos="fade-up"
           >
             <h2 className="m-0 text-xl font-semibold leading-tight border-0 border-gray-300 lg:text-3xl md:text-2xl">
@@ -167,7 +171,7 @@ const LandingPage = () => {
 
           {/* Image */}
           <div
-            className="box-border relative w-full max-w-md px-4 mt-10 mb-4 text-center bg-no-repeat bg-contain border-solid md:mt-0 md:max-w-none lg:mb-0 md:w-1/2"
+            className="max-w-full box-border relative w-full px-4 mt-10 mb-4 text-center bg-no-repeat bg-contain border-solid md:mt-0 md:max-w-none lg:mb-0 md:w-1/2"
             data-aos="fade-up"
           >
             <img
@@ -179,10 +183,10 @@ const LandingPage = () => {
         </div>
       </section>
       <section className="py-7">
-        <div className="container items-center max-w-6xl px-4 px-10 mx-auto sm:px-20 md:px-32 lg:px-16">
+        <div className="container items-center max-w-6xl px-4 mx-auto sm:px-20 md:px-32 lg:px-16">
           <div className="flex flex-wrap items-center -mx-3">
             <div
-              className="order-0 w-full px-3 lg:w-1/2 lg:order-0"
+              className="max-w-full order-0 w-full px-3 lg:w-1/2 lg:order-0"
               data-aos="fade-up"
             >
               <div className="w-full lg:max-w-md">
@@ -205,7 +209,6 @@ const LandingPage = () => {
                     >
                       <path
                         strokeLinecap="round"
-                        st="round"
                         strokeWidth="2"
                         d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"
                       ></path>
@@ -256,7 +259,7 @@ const LandingPage = () => {
               </div>
             </div>
             <div
-              className="w-full px-3 mb-12 lg:w-1/2 order-1 lg:order-0 lg:mb-0"
+              className="w-full max-w-full px-3 mb-12 lg:w-1/2 order-1 lg:order-0 lg:mb-0"
               data-aos="fade-up"
             >
               <img
