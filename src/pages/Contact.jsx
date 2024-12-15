@@ -3,7 +3,7 @@ import Footer from "../components/Footer";
 
 const Contact = () => {
   return (
-    <div className="bg-gray-100 pt-20">
+    <div className="bg-gray-100 pt-24">
       <div className="h-full flex justify-center items-center">
         <div className="w-full max-w-6xl px-4">
           <div className="grid lg:grid-cols-3 gap-6 items-center">
