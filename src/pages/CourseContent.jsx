@@ -45,7 +45,7 @@ const CourseContent = () => {
         <main className="flex-[2.5] bg-gray-50 dark:bg-gray-900">
           <div className="bg-gray-700">
             {loading ? (
-              <div role="status" className="flex items-center justify-center h-[400px]">
+              <div role="status" className="flex items-center justify-center h-52 sm:h-72 md:h-96">
                 <svg
                   aria-hidden="true"
                   className="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
