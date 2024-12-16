@@ -1,22 +1,26 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import Footer from "../components/Footer";
-import courseService from "../services/course.services";
+// Courses.jsx
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Footer from '../components/Footer';
+import courseService from '../services/course.services';
+import Loader from '../components/Loader';
+import ErrorPage from './ErrorPage';  // Import ErrorPage
 
 const Courses = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const BASE_URL = import.meta.env.VITE_API_URL;
+  console.log('Base url', BASE_URL);
 
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        // Fetch courses from the API
         const data = await courseService.getAllCourses();
         setCourses(data); // Update state with the API response
       } catch (err) {
-        console.error("Error fetching courses:", err);
-        setError("Failed to load courses. Please try again later.");
+        console.error('Error fetching courses:', err);
+        setError('Failed to load courses. Please try again later.');
       } finally {
         setLoading(false); // Stop the loading spinner
       }
@@ -26,23 +30,11 @@ const Courses = () => {
   }, []);
 
   if (loading) {
-    return (
-      <div className="bg-gray-100 dark:bg-gray-900 pt-28 h-full">
-        <h1 className="text-4xl font-bold text-center text-blue-700 dark:text-white mb-6">
-          Loading Courses...
-        </h1>
-      </div>
-    );
+    return <Loader />;
   }
 
   if (error) {
-    return (
-      <div className="bg-gray-100 dark:bg-gray-900 pt-28 h-full">
-        <h1 className="text-4xl font-bold text-center text-red-500 mb-6">
-          {error}
-        </h1>
-      </div>
-    );
+    return <ErrorPage message={error} />;
   }
 
   return (
@@ -57,7 +49,7 @@ const Courses = () => {
       <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-6 max-w-6xl mx-auto mb-10">
         {courses.map((course) => (
           <Link
-            to='/signup'
+            to="/signup"
             key={course.id}
             className="transform transition duration-300 hover:scale-105"
           >

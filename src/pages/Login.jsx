@@ -42,7 +42,7 @@ const Login = () => {
   };
 
   return (
-    <div className="h-full bg-gray-100 min-h-screen flex flex-col dark:bg-gray-900">
+    <div className="h-full bg-gray-100 min-h-screen flex flex-col dark:bg-gray-900 pt-20">
       {/* Main Content */}
       <div className="flex-grow flex items-center justify-center p-6">
         <div className="w-full max-w-sm bg-white p-8 rounded-lg shadow-lg">

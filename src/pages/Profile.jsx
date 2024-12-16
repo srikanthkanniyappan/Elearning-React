@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import authService from "../services/auth.services"; // Assuming the path to auth services is correct
+import Loader from "../components/Loader";
+import ErrorPage from "./ErrorPage";
 
 const Profile = () => {
   const [profile, setProfile] = useState(null);
@@ -23,11 +25,12 @@ const Profile = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader/>;
   }
 
+
   if (error) {
-    return <div>{error}</div>;
+    return <ErrorPage message={error} />;
   }
 
   // Capitalize the first letter of the role

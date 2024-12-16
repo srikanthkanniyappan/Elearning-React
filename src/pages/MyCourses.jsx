@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/course.services";
+import Loader from "../components/Loader";
+import ErrorPage from "./ErrorPage";
 
 const MyCourses = () => {
   const [courses, setCourses] = useState([]);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const [loadingCourse, setLoadingCourse] = useState(false); // New state for course-specific loading
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -25,6 +28,7 @@ const MyCourses = () => {
   }, []);
 
   const handleCourseClick = async (courseTitle, courseId) => {
+    setLoadingCourse(true); // Show loader when course is clicked
     try {
       // Fetch last watched video for the course
       const lastWatchedResponse = await api.getLastWatched(courseId);
@@ -33,12 +37,14 @@ const MyCourses = () => {
       // Convert course title to slug format
       const courseTitleSlug = courseTitle.replace(/\s+/g, "-").toLowerCase();
 
-      // Navigate to the course content page with the last watched video ID and courseId in state
+      // Navigate to the course content page with the last watched video ID and courseId in the URL
       navigate(
         `/courses/${courseTitleSlug}/${courseId}/video/${lastWatchedVideoId}`
       );
     } catch (error) {
       console.error("Error fetching last watched video:", error);
+    } finally {
+      setLoadingCourse(false); // Hide loader after navigation
     }
   };
 
@@ -46,24 +52,12 @@ const MyCourses = () => {
     navigate("/all-courses"); // Navigate to the All Courses page
   };
 
-  if (loading) {
-    return (
-      <div className="bg-gray-100 dark:bg-gray-900 pt-28 h-full">
-        <h1 className="text-4xl font-bold text-center text-blue-700 dark:text-white mb-6">
-          Loading Your Courses...
-        </h1>
-      </div>
-    );
+  if (loading || loadingCourse) {
+    return <Loader />; // Display loader if courses are loading or course is clicked
   }
 
   if (error) {
-    return (
-      <div className="bg-gray-100 dark:bg-gray-900 pt-28 h-full">
-        <h1 className="text-4xl font-bold text-center text-red-500 mb-6">
-          {error}
-        </h1>
-      </div>
-    );
+    return <ErrorPage message={error} />;
   }
 
   return (

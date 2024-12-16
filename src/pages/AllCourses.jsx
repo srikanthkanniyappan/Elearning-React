@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import courseService from "../services/course.services";
+import Loader from "../components/Loader";
+import ErrorPage from "./ErrorPage";
 
 const AllCourses = () => {
   const [courses, setCourses] = useState([]);
@@ -8,6 +10,8 @@ const AllCourses = () => {
   const [error, setError] = useState(null);
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [alert, setAlert] = useState(null);
+  const [loadingCourse, setLoadingCourse] = useState(false);
+  const [loadingEnroll, setLoadingEnroll] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,6 +33,8 @@ const AllCourses = () => {
   const handleEnrollNow = async () => {
     if (!selectedCourse) return;
 
+    setLoadingEnroll(true); // Set loadingEnroll to true when enrollment starts
+
     try {
       await courseService.enrollInCourse({ course_id: selectedCourse });
       setAlert({ type: "success", message: "Successfully enrolled in the course!" });
@@ -43,6 +49,8 @@ const AllCourses = () => {
     } catch (error) {
       setAlert({ type: "error", message: "Failed to enroll. Please try again later." });
       setSelectedCourse(null); // Close the popup on failure
+    } finally {
+      setLoadingEnroll(false); // Set loadingEnroll to false when enrollment is complete
     }
 
     // Hide alert after 1 second
@@ -52,6 +60,7 @@ const AllCourses = () => {
   };
 
   const handleCourseClick = async (courseTitle, courseId) => {
+    setLoadingCourse(true); // Show loader when navigating to a course
     try {
       // Fetch last watched video for the course
       const lastWatchedResponse = await courseService.getLastWatched(courseId);
@@ -60,30 +69,22 @@ const AllCourses = () => {
       // Convert course title to slug format
       const courseTitleSlug = courseTitle.replace(/\s+/g, "-").toLowerCase();
   
-      // Navigate to the course content page with the last watched video ID and courseId in the URL
+      // Navigate to the course content page
       navigate(`/courses/${courseTitleSlug}/${courseId}/video/${lastWatchedVideoId}`);
     } catch (error) {
       console.error("Error fetching last watched video:", error);
+    } finally {
+      setLoadingCourse(false); // Hide loader after navigation
     }
   };
-  
 
-  if (loading) {
-    return (
-      <div className="bg-gray-100 dark:bg-gray-900 pt-28 h-full">
-        <h1 className="text-4xl font-bold text-center text-blue-700 dark:text-white mb-6">
-          Loading Courses...
-        </h1>
-      </div>
-    );
+  if (loading || loadingCourse) {
+    return <Loader />;
   }
 
+
   if (error) {
-    return (
-      <div className="bg-gray-100 dark:bg-gray-900 pt-28 h-full">
-        <h1 className="text-4xl font-bold text-center text-red-500 mb-6">{error}</h1>
-      </div>
-    );
+    return <ErrorPage message={error} />;
   }
 
   return (
@@ -98,11 +99,10 @@ const AllCourses = () => {
       {/* Alert Section */}
       {alert && (
         <div
-          className={`fixed bottom-3 right-0 z-50 flex items-center p-3 mb-4 text-sm rounded-lg w-3/4 sm:w-1/2 lg:w-1/3 ${
-            alert.type === "success"
-              ? "text-blue-800 bg-blue-100 dark:bg-gray-800 dark:text-blue-400 opacity-100"
-              : "text-red-800 bg-red-100 dark:bg-gray-800 dark:text-red-400 opacity-100"
-          }`}
+          className={`fixed bottom-3 right-0 z-50 flex items-center p-3 mb-4 text-sm rounded-lg w-3/4 sm:w-1/2 lg:w-1/3 ${alert.type === "success"
+            ? "text-blue-800 bg-blue-100 dark:bg-gray-800 dark:text-blue-400 opacity-100"
+            : "text-red-800 bg-red-100 dark:bg-gray-800 dark:text-red-400 opacity-100"
+            }`}
           role="alert"
         >
           <svg
@@ -139,52 +139,52 @@ const AllCourses = () => {
         </div>
       )}
 
-<div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-6 max-w-6xl mx-auto mb-10">
-          {courses.map((course) => (
-            <div
-              key={course.id}
-              className="cursor-pointer transform transition duration-300 hover:scale-105"
-              onClick={() => {
-                if (course.is_enrolled) {
-                  handleCourseClick(course.title, course.id);
-                } else {
-                  setSelectedCourse(course.id);
-                }
-              }}
-            >
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 flex flex-col h-full">
-                <img
-                  src={course.poster}
-                  alt={course.title}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="flex flex-col justify-between items-center p-6 flex-grow">
-                  <div>
-                    <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-3">
-                      {course.title}
-                    </h2>
-                    <p className="text-gray-600 dark:text-gray-400 mb-4">{course.description}</p>
-                  </div>
-                  {course.is_enrolled ? (
-                    <span className="text-green-600 dark:text-green-400 font-medium mt-auto text-lg">
-                      Enrolled
-                    </span>
-                  ) : (
-                    <button
-                      className="text-white w-1/2 bg-blue-600 dark:bg-blue-800 font-medium px-4 py-2 rounded-md hover:bg-blue-700 dark:hover:bg-blue-900 transition-colors"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setSelectedCourse(course.id);
-                      }}
-                    >
-                      Enroll Now
-                    </button>
-                  )}
+      <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-6 max-w-6xl mx-auto mb-10">
+        {courses.map((course) => (
+          <div
+            key={course.id}
+            className="cursor-pointer transform transition duration-300 hover:scale-105"
+            onClick={() => {
+              if (course.is_enrolled) {
+                handleCourseClick(course.title, course.id);
+              } else {
+                setSelectedCourse(course.id);
+              }
+            }}
+          >
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 flex flex-col h-full">
+              <img
+                src={course.poster}
+                alt={course.title}
+                className="w-full h-48 object-cover"
+              />
+              <div className="flex flex-col justify-between items-center p-6 flex-grow">
+                <div>
+                  <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-3">
+                    {course.title}
+                  </h2>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">{course.description}</p>
                 </div>
+                {course.is_enrolled ? (
+                  <span className="text-green-600 dark:text-green-400 font-medium mt-auto text-lg">
+                    Enrolled
+                  </span>
+                ) : (
+                  <button
+                    className="text-white w-1/2 bg-blue-600 dark:bg-blue-800 font-medium px-4 py-2 rounded-md hover:bg-blue-700 dark:hover:bg-blue-900 transition-colors"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedCourse(course.id);
+                    }}
+                  >
+                    Enroll Now
+                  </button>
+                )}
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
+      </div>
 
       {selectedCourse && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center overflow-hidden">
@@ -202,10 +202,22 @@ const AllCourses = () => {
                 className="bg-blue-600 text-white px-4 py-2 rounded"
                 onClick={handleEnrollNow}
               >
-                Enroll Now
+                {loadingEnroll ? (
+                  <span className="spinner-border animate-spin w-5 h-5 border-4 border-blue-500 border-t-transparent rounded-full"></span>
+                ) : (
+                  'Enroll Now'
+                )}
               </button>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Full-Screen Loader */}
+      {loadingEnroll && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="text-white text-2xl">Enrolling...</div>
+          <div className="spinner-border animate-spin w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full mt-4"></div>
         </div>
       )}
     </div>
