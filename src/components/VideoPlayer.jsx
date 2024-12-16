@@ -31,6 +31,7 @@ const VideoPlayer = ({ video }) => {
             attributes: {
               poster: video.poster,
               controlsList: "nodownload",
+              playsInline: true,
             },
           },
         }}
