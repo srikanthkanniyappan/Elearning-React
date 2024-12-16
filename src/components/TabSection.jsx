@@ -5,7 +5,7 @@ const TabSection = ({video}) => {
   const [activeTab, setActiveTab] = useState('overview');
 
   useEffect(() => {
-    // Set the default tab to 'overview' on initial load
+
     setActiveTab('overview');
   }, []);
 
@@ -15,47 +15,60 @@ const TabSection = ({video}) => {
         <ul className="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab" data-tabs-toggle="#default-tab-content" role="tablist">
           {/* New "Sidebar Content" tab for medium screens only */}
           <li className="me-2 block lg:hidden" role="presentation">
-            <button
-              className={`inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 ${activeTab === 'sidebar-content' ? 'border-blue-500 text-blue-600 dark:text-blue-300' : 'border-transparent'}`}
-              id="sidebar-content-tab"
-              data-tabs-target="#sidebar-content"
-              type="button"
-              role="tab"
-              aria-controls="sidebar-content"
-              aria-selected={activeTab === 'sidebar-content'}
-              onClick={() => setActiveTab('sidebar-content')}
-            >
-              Course Content
-            </button>
-          </li>
-          <li className="me-2" role="presentation">
-            <button
-              className={`inline-block p-4 border-b-2 rounded-t-lg ${activeTab === 'overview' ? 'border-blue-500 text-blue-600 dark:text-blue-300' : 'border-transparent'}`}
-              id="overview-tab"
-              data-tabs-target="#overview"
-              type="button"
-              role="tab"
-              aria-controls="overview"
-              aria-selected={activeTab === 'overview'}
-              onClick={() => setActiveTab('overview')}
-            >
-              Overview
-            </button>
-          </li>
-          <li className="me-2" role="presentation">
-            <button
-              className={`inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 ${activeTab === 'qa' ? 'border-blue-500 text-blue-600 dark:text-blue-300' : 'border-transparent'}`}
-              id="qa-tab"
-              data-tabs-target="#qa"
-              type="button"
-              role="tab"
-              aria-controls="qa"
-              aria-selected={activeTab === 'qa'}
-              onClick={() => setActiveTab('qa')}
-            >
-              Q&A
-            </button>
-          </li>
+  <button
+    className={`inline-block p-4 border-b-2 rounded-t-lg ${
+      activeTab === 'sidebar-content'
+        ? 'border-blue-500 text-blue-600 dark:text-blue-300'
+        : 'border-transparent text-gray-500 dark:text-gray-400'
+    }`}
+    id="sidebar-content-tab"
+    data-tabs-target="#sidebar-content"
+    type="button"
+    role="tab"
+    aria-controls="sidebar-content"
+    aria-selected={activeTab === 'sidebar-content'}
+    onClick={() => setActiveTab('sidebar-content')}
+  >
+    Course Content
+  </button>
+</li>
+<li className="me-2" role="presentation">
+  <button
+    className={`inline-block p-4 border-b-2 rounded-t-lg ${
+      activeTab === 'overview'
+        ? 'border-blue-500 text-blue-600 dark:text-blue-300'
+        : 'border-transparent text-gray-500 dark:text-gray-400'
+    }`}
+    id="overview-tab"
+    data-tabs-target="#overview"
+    type="button"
+    role="tab"
+    aria-controls="overview"
+    aria-selected={activeTab === 'overview'}
+    onClick={() => setActiveTab('overview')}
+  >
+    Overview
+  </button>
+</li>
+<li className="me-2" role="presentation">
+  <button
+    className={`inline-block p-4 border-b-2 rounded-t-lg ${
+      activeTab === 'qa'
+        ? 'border-blue-500 text-blue-600 dark:text-blue-300'
+        : 'border-transparent text-gray-500 dark:text-gray-400'
+    }`}
+    id="qa-tab"
+    data-tabs-target="#qa"
+    type="button"
+    role="tab"
+    aria-controls="qa"
+    aria-selected={activeTab === 'qa'}
+    onClick={() => setActiveTab('qa')}
+  >
+    Q&A
+  </button>
+</li>
+
         </ul>
       </div>
 
