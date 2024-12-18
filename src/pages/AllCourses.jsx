@@ -202,11 +202,7 @@ const AllCourses = () => {
                 className="bg-blue-600 text-white px-4 py-2 rounded"
                 onClick={handleEnrollNow}
               >
-                {loadingEnroll ? (
-                  <span className="spinner-border animate-spin w-5 h-5 border-4 border-blue-500 border-t-transparent rounded-full"></span>
-                ) : (
-                  'Enroll Now'
-                )}
+                  Enroll Now
               </button>
             </div>
           </div>
