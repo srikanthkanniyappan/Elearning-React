@@ -60,41 +60,6 @@ const getVideo = async (videoId) => {
   }
 };
 
-const getCourseWatchHistory = async (courseId) => {
-  try {
-    const response = await api.get(
-      `/courses/course-content/${courseId}/watch-history/`
-    );
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching watch history", error);
-    throw error;
-  }
-};
-
-const getVideoWatchHistory = async (videoId) => {
-  try {
-    const response = await api.get(`/courses/videos/${videoId}/watch-history/`);
-    return response.data;
-  } catch (error) {
-    console.error(`Error fetching watch history for video ${videoId}`, error);
-    throw error;
-  }
-};
-
-const updateVideoWatchHistory = async (videoId, data) => {
-  try {
-    const response = await api.post(
-      `/courses/videos/${videoId}/watch-history/update/`,
-      data
-    );
-    return response.data;
-  } catch (error) {
-    console.error("Error updating watch history", error);
-    throw error;
-  }
-};
-
 const uploadVideo = async (videoData) => {
   try {
     const response = await api.post("/courses/videos/upload/", videoData);
@@ -168,9 +133,6 @@ export default {
   getCourseDetails,
   getCourseVideos,
   getVideo,
-  getCourseWatchHistory,
-  getVideoWatchHistory,
-  updateVideoWatchHistory,
   uploadVideo,
   enrollInCourse,
   updateEnrollmentStatus,
