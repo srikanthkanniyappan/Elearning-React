@@ -1,7 +1,7 @@
 <div align="center">
   <!-- Logo and Title Section -->
   <a href="https://elearning-react-frontend.vercel.app">
-    <img src="https://github.com/user-attachments/assets/5ecbd757-f1d4-46e5-8dab-77e19dc0f2f0" alt="Elearning Logo" height="100px" width="100px" />
+    <img src="https://github.com/user-attachments/assets/7db4ae9c-246f-40b5-a686-1fb69222714b" alt="Elearning Logo" height="100px" width="100px" />
   </a>
   <h1>Elearning-React 🎓</h1>
   <p>Welcome to the Elearning platform! Enroll in courses, access content, and start your learning journey! 📚</p>
@@ -72,12 +72,12 @@
 
 <table>
   <tr>
-    <td align="center"><img src="https://github.com/user-attachments/assets/8cc37163-fa04-49cb-b430-d9b83aa8817a" alt="Desktop-1" width="400"/><br/><b>Landing Page</b></td>
-    <td align="center"><img src="https://github.com/user-attachments/assets/e9f64cb1-8e43-4c3c-bc90-4005093efa01" alt="Desktop-2" width="400"/><br/><b>Login Page</b></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/09a7796c-24d8-45e2-af62-bdfeda2e7bfd" alt="Desktop-1" width="400"/><br/><b>Landing Page</b></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/7529fd37-edd1-4f4a-a102-3699e182e7b8" alt="Desktop-2" width="400"/><br/><b>Login Page</b></td>
   </tr>
   <tr>
-    <td align="center"><img src="https://github.com/user-attachments/assets/c5f40ebc-9dab-4427-be86-9f74ea1f586e" alt="Desktop-3" width="400"/><br/><b>Course View</b></td>
-    <td align="center"><img src="https://github.com/user-attachments/assets/728eca9f-4c7b-4ac7-9a32-35e70e30e1e6" alt="Desktop-4" width="400"/><br/><b>Course Content</b></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/4b54175e-f8ae-4e9d-8f7e-22b927b52653" alt="Desktop-3" width="400"/><br/><b>Course View</b></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/65444d2b-3e22-4d10-96c5-b3db75b8f213" alt="Desktop-4" width="400"/><br/><b>Course Content</b></td>
   </tr>
 </table>
 
@@ -87,12 +87,12 @@
 
 <table>
   <tr>
-    <td align="center"><img src="https://github.com/user-attachments/assets/26e635b3-7a15-47ef-b0f7-77862dcdb561" alt="Mobile-1" width="250"/><br/><b>Landing Page</b></td>
-    <td align="center"><img src="https://github.com/user-attachments/assets/61a9774e-bceb-44b0-8875-2772a0030e4e" alt="Mobile-2" width="250"/><br/><b>Login Page</b></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/f82a58b8-6780-4166-b533-a177b607a1d9" alt="Mobile-1" width="250"/><br/><b>Landing Page</b></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/b472c0f2-0d2d-44d4-ade6-6fa5785687bb" alt="Mobile-2" width="250"/><br/><b>Login Page</b></td>
   </tr>
   <tr>
-    <td align="center"><img src="https://github.com/user-attachments/assets/0ad810f0-f2aa-4434-95f2-13010f618a9c" alt="Mobile-3" width="250"/><br/><b>Course View</b></td>
-    <td align="center"><img src="https://github.com/user-attachments/assets/40e0f156-d6d1-4386-94fa-94e8118134a6" alt="Mobile-4" width="250"/><br/><b>Course Content</b></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/c6d89d50-cb01-4fa0-a8e1-b9661a617fbc" alt="Mobile-3" width="250"/><br/><b>Course View</b></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/0540ca17-7513-437e-9a74-eb90011d718c" alt="Mobile-4" width="250"/><br/><b>Course Content</b></td>
   </tr>
 </table>
 

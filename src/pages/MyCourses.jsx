@@ -85,7 +85,7 @@ const MyCourses = () => {
           </button>
         </div>
       ) : (
-        <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-6 max-w-6xl mx-auto mb-10">
+        <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-6 max-w-6xl mx-auto mb-10 bg-gray-100">
           {courses.map((course) => (
             <div
               key={course.id}

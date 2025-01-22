@@ -95,7 +95,7 @@ const AllCourses = () => {
   }
 
   return (
-    <div className="bg-gray-100 dark:bg-gray-900 pt-24 h-full">
+    <div className="bg-gray-100 dark:bg-gray-900 pt-24 h-screen">
       <h1 className="text-4xl font-bold text-center text-blue-700 dark:text-white mb-6">
         Explore Our Courses
       </h1>
@@ -150,7 +150,7 @@ const AllCourses = () => {
         </div>
       )}
 
-      <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-6 max-w-6xl mx-auto mb-10">
+      <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-6 max-w-6xl mx-auto mb-10 bg-gray-100">
         {courses.map((course) => (
           <div
             key={course.id}
